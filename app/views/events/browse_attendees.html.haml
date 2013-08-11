@@ -19,9 +19,12 @@
 
   %body
     .container-fluid
-      .row-fluid
-        .span3
-        .span9
+      - @users.each_slice(2) do |users|
+        .row-fluid
+          - users.each do |user|
+            .span6
+              = image_tag user.picture, alt: user.name, height: 300, width: 200
+              = link_to "Escoger", vote_event_user_path(@event, user), :class => 'btn btn-secondary'
     
       %footer
         %p &copy; Company 2013

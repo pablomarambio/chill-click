@@ -7,6 +7,7 @@ ChillClick::Application.routes.draw do
 		resources :users, only: [:index, :new, :create] do
 			member do
 				get 'link'
+				post 'vote'
 			end
 		end
 	end
