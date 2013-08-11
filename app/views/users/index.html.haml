@@ -8,7 +8,7 @@
       %th= model_class.human_attribute_name(:name)
       %th= model_class.human_attribute_name(:picture)
       %th= model_class.human_attribute_name(:cellphone)
-      %th= model_class.human_attribute_name(:mail)
+      %th= model_class.human_attribute_name(:email)
       %th= model_class.human_attribute_name(:created_at)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
@@ -18,7 +18,7 @@
         %td= user.name
         %td= user.picture
         %td= user.cellphone
-        %td= user.mail
+        %td= user.email
         %td=l user.created_at
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_user_path(user), :class => 'btn btn-mini'

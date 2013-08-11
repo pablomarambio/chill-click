@@ -29,5 +29,9 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 	end
+
+	def login
+		login_user_by_auth_code
+	end
 	
 end

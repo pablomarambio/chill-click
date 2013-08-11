@@ -15,9 +15,18 @@
   %br
   = @user.cellphone
 %p
-  %strong= model_class.human_attribute_name(:mail) + ':'
+  %strong= model_class.human_attribute_name(:email) + ':'
   %br
-  = @user.mail
+  = @user.email
+%p
+  %strong
+    Código de Ingreso
+  %br
+  - if @user.auth_code
+    = link_to "Probar",  signin_by_code_path(@user.auth_code)
+  - else
+    = link_to "Inexistente", "#"
+
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), users_path, :class => 'btn'
