@@ -1,7 +1,15 @@
 class UsersController < ApplicationController
 	
 	def index
-		@users = User.all
+		if params[:event_id]
+			@event = Event.find(params[:event_id])
+			raise InvalidEventError unless @event
+			@users = @event.users
+			@m_title = "Asistentes de #{@event.name}"
+		else
+			@users = User.all
+			@m_title = "Usuarios"
+		end
 	end
 
 	def edit
