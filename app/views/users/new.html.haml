@@ -1,4 +1,23 @@
 - model_class = User
 .page-header
-  %h1=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize
+  %h1
+    Nuevo usuario
 = render :partial => "form"
+
+- if @event
+  - content_for(:javascript) do
+    :plain
+      $("input#user_email").change(function(){
+        var email = $(this).val();
+        $.get(
+          "#{query_users_path}", 
+          {email: email},
+          function(data) {
+            if(data.existing) {
+              $("#emailfields a").show().attr("href", "/events/#{@event.id}/users/" + data.user_id + "/link").text("Vincular a " + data.name);
+            } else {
+              $("#emailfields a").hide();
+            }
+          }
+        );
+      });

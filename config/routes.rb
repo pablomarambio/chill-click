@@ -1,11 +1,18 @@
 ChillClick::Application.routes.draw do
 
   resources :events do
-  	resources :users, only: [:index]
+  	resources :users, only: [:index, :new, :create] do
+  		member do
+  			get 'link'
+  		end
+  	end
   end
 
-
-  resources :users
+  resources :users do
+  	collection do
+  		get :query
+  	end
+  end
   
   devise_for :users
 
