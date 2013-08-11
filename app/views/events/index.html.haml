@@ -8,7 +8,7 @@
       %th= model_class.human_attribute_name(:name)
       %th= model_class.human_attribute_name(:description)
       %th= model_class.human_attribute_name(:when)
-      %th= model_class.human_attribute_name(:created_at)
+      %th= model_class.human_attribute_name(:users)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @events.each do |event|
@@ -17,7 +17,8 @@
         %td= event.name
         %td= event.description
         %td= event.when
-        %td=l event.created_at
+        %td
+          = link_to "Ver", event_users_path(event)
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_event_path(event), :class => 'btn btn-mini'
           = link_to t('.destroy', :default => t("helpers.links.destroy")), event_path(event), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
