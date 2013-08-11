@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 		raise Application::InvalidCodeError unless @user
 		sign_in @user
 		flash[:notice] = "Gusto de verte, #{@user.name}"
-		redirect_to root_path
+		redirect_to browse_attendees_event_path(@user.events.first)
 	rescue Application::InvalidCodeError
 		flash[:error] = "Código inválido, por favor comunícate con el rpoductor de tu evento"
 		redirect_to root_path

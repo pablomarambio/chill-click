@@ -80,4 +80,12 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def browse_attendees
+    @event = Event.find(params[:id])
+    authorize! :browse_attendees, @event
+    raise InvalidEventError unless @event
+    @users = @event.users.select { |u| u.id != current_user.id }
+    render layout: false
+  end
 end
