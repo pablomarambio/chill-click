@@ -9,7 +9,7 @@
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
       = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
-    = stylesheet_link_tag "application", :media => "all"
+    = stylesheet_link_tag "public", :media => "all"
     = favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
     = favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
     = favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
@@ -18,13 +18,14 @@
 
 
   %body
-    .container-fluid
-      - @users.each_slice(2) do |users|
-        .row-fluid
-          - users.each do |user|
-            .span6
-              = image_tag user.picture, alt: user.name, height: 300, width: 200
-              = link_to "Escoger", vote_event_user_path(@event, user), :class => 'btn btn-secondary'
+    #wrapper
+      #columns
+        - @users.each do |user|
+          .pin
+            = image_tag user.picture, alt: user.name
+            %p
+              asdkjbasd askdjbas ndaod qkwdpiqwd qjlwd qkwd q qk fqw dljqw dflqjwf qlef wlehf wehf welf weljf qjlwd qkwd q qk fqw dljqw dflqjwf qlef wlehf wehf welf weljf 
+              /= link_to "Escoger", vote_event_user_path(@event, user), :class => 'btn btn-secondary'
     
       %footer
         %p &copy; Company 2013
