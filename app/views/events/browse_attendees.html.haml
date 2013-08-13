@@ -18,14 +18,18 @@
 
 
   %body
+    - @users.each do |user|
+      = user.name
     #wrapper
       #columns
         - @users.each do |user|
           .pin
             = image_tag user.picture, alt: user.name
             %p
-              asdkjbasd askdjbas ndaod qkwdpiqwd qjlwd qkwd q qk fqw dljqw dflqjwf qlef wlehf wehf welf weljf qjlwd qkwd q qk fqw dljqw dflqjwf qlef wlehf wehf welf weljf 
-              /= link_to "Escoger", vote_event_user_path(@event, user), :class => 'btn btn-secondary'
+              %strong= user.name
+              %a{ href: vote_event_user_path(@event, user), class: 'button-link' }
+                %span= "Escoger a #{user.name}"
+                ♡
     
       %footer
         %p &copy; Company 2013
