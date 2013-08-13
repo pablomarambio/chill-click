@@ -17,14 +17,18 @@
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
 
   %body
+    - @users.each do |user|
+      = user.name
     #wrapper
       #columns
         - @users.each do |user|
           .pin
             = image_tag user.picture, alt: user.name
             %p
-              = user.name
-              /= link_to "Escoger", vote_event_user_path(@event, user), :class => 'btn btn-secondary'
+              %strong= user.name
+              %a{ href: vote_event_user_path(@event, user), class: 'button-link' }
+                %span= "Escoger a #{user.name}"
+                ♡
     
       %footer
         %p &copy; Wibs 2013
