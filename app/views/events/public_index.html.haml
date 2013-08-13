@@ -19,11 +19,11 @@
   %body
     #wrapper
       #columns
-        - @users.each do |user|
+        - @events.each do |event|
           .pin
-            = image_tag user.picture, alt: user.name
+            = image_tag event.picture, alt: event.name
             %p
-              = user.name
+              = event.description
               /= link_to "Escoger", vote_event_user_path(@event, user), :class => 'btn btn-secondary'
     
       %footer

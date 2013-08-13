@@ -7,6 +7,7 @@
       %th= model_class.human_attribute_name(:id)
       %th= model_class.human_attribute_name(:name)
       %th= model_class.human_attribute_name(:description)
+      %th= model_class.human_attribute_name(:picture)
       %th= model_class.human_attribute_name(:when)
       %th= model_class.human_attribute_name(:users)
       %th=t '.actions', :default => t("helpers.actions")
@@ -16,6 +17,7 @@
         %td= link_to event.id, event_path(event)
         %td= event.name
         %td= event.description
+        %td= event.picture
         %td= event.when
         %td
           = link_to "Ver", event_users_path(event)

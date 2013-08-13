@@ -22,6 +22,6 @@ ChillClick::Application.routes.draw do
 
 	get "/login/:code" => "users#login", as: "signin_by_code"
 
-	root to: "users#index"
+	root to: "events#public_index"
 	
 end

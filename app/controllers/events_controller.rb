@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  
   # GET /events
   # GET /events.json
   def index
@@ -8,6 +9,12 @@ class EventsController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @events }
     end
+  end
+
+  def public_index
+    @events = Event.all
+    raise InvalidEventError unless @events
+    render layout: false
   end
 
   # GET /events/1
