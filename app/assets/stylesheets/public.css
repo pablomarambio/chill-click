@@ -137,3 +137,7 @@ body {
 	right: 5px;
 	top: 5px;
 }
+
+#columns:hover .pin:not(:hover) {
+	opacity: 0.4;
+}
