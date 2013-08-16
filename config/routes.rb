@@ -23,6 +23,6 @@ ChillClick::Application.routes.draw do
 	get "/login/:auth_code" => "users#login", as: "signin_by_code"
 	delete "/logout" => "users#logout", as: "logout_user"
 
-	root to: "users#index"
+	root to: "events#public_index"
 	
 end
