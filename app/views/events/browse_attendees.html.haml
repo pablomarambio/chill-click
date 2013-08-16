@@ -48,9 +48,10 @@
             = image_tag user.picture, alt: user.name
             %p
               %strong= user.name
-              %a{ href: vote_event_user_path(@event, user), class: 'button-link' }
-                %span= "Escoger a #{user.name}"
-                ♡
+            .btn-group.vote-btn
+              %a.btn.btn-primary{ href: vote_event_user_path(@event, user) }
+                %i.icon-heart.icon-white
+                %span= "Escoger"
     
       %footer
         %p &copy; Company 2013
