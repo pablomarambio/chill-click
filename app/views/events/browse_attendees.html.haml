@@ -9,12 +9,12 @@
       %a.btn.btn-primary.btn-large Comenzar!
   #columns
     - @users.each do |user|
-      .pin
+      .pin.ready
         = image_tag user.picture, alt: user.name
         %p
           %strong= user.name
         .btn-group.vote-btn
-          %a.btn.btn-primary{ href: vote_event_user_path(@event, user) }
+          %a.btn.btn-primary{ :"data-user" => user.id }
             %i.icon-heart.icon-white
             %span= "Escoger"
         .btn-group.voted-btn
@@ -24,4 +24,11 @@
 
 -content_for :javascript do
   :plain
-    //hello!
+    $(".vote-btn a").click(function(e) {
+      $(this).parents(".pin").removeClass("ready").addClass("chosen");
+      e.preventDefault();
+    })
+    $(".voted-btn a").click(function(e) {
+      $(this).parents(".pin").removeClass("chosen").addClass("ready");
+      e.preventDefault();
+    })
