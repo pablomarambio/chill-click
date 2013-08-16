@@ -45,6 +45,10 @@ class UsersController < ApplicationController
 		login_user_by_auth_code
 	end
 
+	def logout
+		logout_user
+	end
+
 	def query
 		@user = User.find_by_email params[:email]
 		render json: {existing: false} and return unless @user
