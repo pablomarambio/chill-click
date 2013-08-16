@@ -140,7 +140,7 @@ DEPENDENCIES
   cancan
   coffee-rails (~> 3.2.1)
   devise
-  eventmachine (~> 1.0.3)
+  eventmachine (~> 1.0.0)
   haml-rails
   jquery-rails
   jquery-ui-rails

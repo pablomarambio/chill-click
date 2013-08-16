@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby "1.9.3"
 gem 'rails', '3.2.11'
 
 # Bundle edge Rails instead:
@@ -8,7 +9,7 @@ gem 'rails', '3.2.11'
 group :test do
 	gem 'sqlite3'
 end
-gem 'eventmachine', '~> 1.0.3'
+gem 'eventmachine', '~> 1.0.0'
 gem 'pg'
 gem 'devise'
 gem 'thin'
