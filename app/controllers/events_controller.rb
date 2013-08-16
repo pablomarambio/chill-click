@@ -97,8 +97,18 @@ class EventsController < ApplicationController
   end
 
   def vote
+    load_event!
     raise ArgumentError, "Sin votos" if params["users"].blank?
     users = params["users"].split(",").map { |id| User.find(id) }
+    raise Application::NoVotesAvailableError if current_user.votes_casted(@event).length >= 3
+    users.each{ |u| current_user.vote_for @event, u }
     render text: "Votaste por los siguientes usuarios: #{users.map { |u| u.name }.join(", ")}"
+  end
+
+  protected
+  def load_event!
+    @event = Event.find(params[:id])
+    raise Application::InvalidEventError unless @event
+    authorize! :read, @event
   end
 end
