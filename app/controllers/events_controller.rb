@@ -95,4 +95,10 @@ class EventsController < ApplicationController
     @users = @event.users.select { |u| u.id != current_user.id }
     render layout: "public"
   end
+
+  def vote
+    raise ArgumentError, "Sin votos" if params["users"].blank?
+    users = params["users"].split(",").map { |id| User.find(id) }
+    render text: "Votaste por los siguientes usuarios: #{users.map { |u| u.name }.join(", ")}"
+  end
 end

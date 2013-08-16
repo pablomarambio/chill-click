@@ -9,19 +9,22 @@
       %a#start.btn.btn-primary.btn-large Comenzar!
   #columns
     - @users.each do |user|
-      .pin
+      .pin{ :"data-user" => user.id }
         = image_tag user.picture, alt: user.name
         %p
           %strong= user.name
         .btn-group.vote-btn
-          %a.btn.btn-primary{ :"data-user" => user.id }
+          %a.btn.btn-primary
             %i.icon-heart.icon-white
             %span= "Escoger"
         .btn-group.voted-btn
           %a.btn.btn-info
             %i.icon-ok
             %span= "No escoger"
-            
+
+= form_tag vote_event_path(@event), method: :post, style: "display:none;", name: "votes" do
+  = hidden_field_tag 'users', 'XXX'
+
 #modal{style: "display:none;"}
   Has escogido a
   %span#votes-cast.badge.badge-info X
@@ -35,7 +38,6 @@
       $("#starting-message").hide("slow", function() {
         $("#remaining-votes").parents("li").show(function() {
           resetVoting();
-          updateRemainingVotes();
         });
       });
       e.preventDefault();
@@ -63,7 +65,14 @@
       $("#remaining-votes").text(remainingVotes).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100, function() {
         if(remainingVotes == 0) {
           $("#votes-cast").text($(".pin.chosen").length);
-          $("#modal").dialog({modal: true, width: 400, title: "Confirmar votación", buttons:[ { text: "Confirmar y terminar", click: function() { $( this ).dialog( "close" ); } } ]});
+          $("#modal").dialog({modal: true, width: 400, title: "Confirmar votación", buttons:[ 
+          { 
+            text: "Partir de nuevo", 
+            click: function() { resetVoting(); $( this ).dialog( "close" ); } 
+          }, {
+            text: "Confirmar y terminar", 
+            click: function() { vote(); $( this ).dialog( "close" ); } 
+          }]});
         }
       });
     }
@@ -71,4 +80,10 @@
     function resetVoting() {
       remainingVotes = 3;
       $(".pin").removeClass("chosen").addClass("ready");
+          updateRemainingVotes();
+    }
+
+    function vote() {
+      $("input[name='users']").val($(".pin.chosen").map(function(index, element) { return $(element).attr("data-user"); }).get().join(","));
+      $("form[name='votes']").submit();
     }

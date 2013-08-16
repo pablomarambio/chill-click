@@ -3,11 +3,11 @@ ChillClick::Application.routes.draw do
 	resources :events do
 		member do
 			get 'browse_attendees'
+			post 'vote'
 		end
 		resources :users, only: [:index, :new, :create] do
 			member do
 				get 'link'
-				post 'vote'
 			end
 		end
 	end
