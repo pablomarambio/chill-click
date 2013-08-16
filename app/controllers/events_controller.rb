@@ -86,6 +86,6 @@ class EventsController < ApplicationController
     authorize! :browse_attendees, @event
     raise InvalidEventError unless @event
     @users = @event.users.select { |u| u.id != current_user.id }
-    render layout: false
+    render layout: "public"
   end
 end

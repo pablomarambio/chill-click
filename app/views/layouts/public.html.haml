@@ -1,0 +1,56 @@
+!!! 5
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %title= content_for?(:title) ? yield(:title) : "ChillClick"
+    = csrf_meta_tags
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
+    = stylesheet_link_tag "application", :media => "all"
+    = favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
+    = favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
+    = favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
+    = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
+    = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
+
+
+  %body
+    .navbar
+      .navbar-inner
+        .container
+          %button.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+        %a.brand{:href=>"#"} Chill & Click
+        .nav-collapse.collapse
+          %ul.nav
+            %li{:class => "active"}
+              = link_to "Asistentes de #{@event.name}", "#"
+            - if user_signed_in?
+              - if current_user
+                %li{:class => ""}
+                  = link_to "View Profile", root_path, :id => :public_profile_link
+            - else
+              %li{:class => "active"}
+                = link_to "Login", root_path
+          - if user_signed_in?
+            %ul.nav.pull-right
+              %li
+                = link_to "Salir", logout_user_path, method: :delete
+    = yield
+    
+    %footer
+      %p &copy; Company 2013
+    /
+      Javascripts
+      \==================================================
+    / Placed at the end of the document so the pages load faster
+    = javascript_include_tag "application"
+    :javascript
+      $(function(){
+        #{yield(:javascript)}
+      });
