@@ -90,7 +90,7 @@ class EventsController < ApplicationController
 
   def browse_attendees
     @event = Event.find(params[:id])
-    authorize! :browse_attendees, @event
+    authorize! :read, @event
     raise InvalidEventError unless @event
     @users = @event.users.select { |u| u.id != current_user.id }
     render layout: "public"
