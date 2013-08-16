@@ -42,6 +42,14 @@
               %li
                 = link_to "Salir", logout_user_path, method: :delete
     #wrapper
+      .hero-unit
+        %h1 Coincidencias
+        %p 
+          Escoge hasta tres asistentes de
+          %strong= "#{@event.name}."
+          Recibirás los datos de contacto de aquellos que también te escojan a ti.
+        %p
+          %a.btn.btn-primary.btn-large Comenzar!
       #columns
         - @users.each do |user|
           .pin
@@ -52,6 +60,10 @@
               %a.btn.btn-primary{ href: vote_event_user_path(@event, user) }
                 %i.icon-heart.icon-white
                 %span= "Escoger"
+            .btn-group.voted-btn
+              %a.btn.btn-info
+                %i.icon-ok
+                %span= "No escoger"
     
       %footer
         %p &copy; Company 2013

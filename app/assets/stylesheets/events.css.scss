@@ -55,6 +55,11 @@ body {
 	margin: 0;
 }
 
+/*
+#columns:hover .pin:not(:hover) {
+	opacity: 0.4;
+}*/
+
 @media (min-width: 960px) {
 	#columns {
 		-webkit-column-count: 4;
@@ -75,25 +80,28 @@ body {
 	display: block;
 }
 
-.vote-btn {
+.vote-btn, 
+.voted-btn {
 	display: none;
 }
 
-.pin .vote-btn {
+.pin .vote-btn,
+.pin .voted-btn {
 	position: absolute;
 	right: 5px;
 	top: 5px;
 }
 
-/*
-#columns:hover .pin:not(:hover) {
-	opacity: 0.4;
-}*/
+.chosen .voted-btn {
+	display: block;
+}
 
-.vote-btn span {
+.vote-btn span,
+.voted-btn span {
 	display: none;
 }
 
-.vote-btn:hover span {
+.vote-btn:hover span,
+.voted-btn:hover span {
 	display: inline-block;
 }
