@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-	
+	helper_method :auth_link_for
+	# admin actions
+
 	def index
 		if params[:event_id]
 			@event = Event.find(params[:event_id])
@@ -55,8 +57,16 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		raise InvalidUserError unless @user
 		@event.users << @user unless @event.users.include? @user
-		flash[:succes] = "Usuario [#{@user.name}] agregado al evento"
+		flash[:success] = "Usuario [#{@user.name}] agregado al evento"
 		redirect_to event_users_path(@event)
 	end
-	
+
+	def auth_link_for user
+		raise ArgumentError, "Usuario no debe ser nuevo" unless user.persisted?
+		unless user.auth_code
+			user.set_auth_code
+			user.save!
+		end
+		return signin_by_code_path(user.auth_code)
+	end
 end

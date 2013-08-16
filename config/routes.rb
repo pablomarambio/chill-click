@@ -20,7 +20,7 @@ ChillClick::Application.routes.draw do
 	
 	devise_for :users
 
-	get "/login/:code" => "users#login", as: "signin_by_code"
+	get "/login/:auth_code" => "users#login", as: "signin_by_code"
 
 	root to: "users#index"
 	
