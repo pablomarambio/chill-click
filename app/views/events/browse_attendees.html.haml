@@ -1,5 +1,5 @@
 #wrapper
-  .hero-unit
+  #starting-message.hero-unit
     %h1 Coincidencias
     %p 
       Escoge hasta tres asistentes de
@@ -22,11 +22,17 @@
             %i.icon-ok
             %span= "No escoger"
 
+#modal{style: "display:none;"}
+  Has escogido a
+  %span#votes-cast.badge.badge-info X
+  participantes.
+  Recibirás los datos de contacto de aquellos que también te escojan a ti.
+
 -content_for :javascript do
   :plain
     var remainingVotes = 3;
     $("#start").click(function(e){
-      $(".hero-unit").hide("slow", function() {
+      $("#starting-message").hide("slow", function() {
         $("#remaining-votes").parents("li").show(function() {
           resetVoting();
           updateRemainingVotes();
@@ -56,7 +62,8 @@
     function updateRemainingVotes() {
       $("#remaining-votes").text(remainingVotes).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100, function() {
         if(remainingVotes == 0) {
-          // show div modal
+          $("#votes-cast").text($(".pin.chosen").length);
+          $("#modal").dialog({modal: true, width: 400, title: "Confirmar votación", buttons:[ { text: "Confirmar y terminar", click: function() { $( this ).dialog( "close" ); } } ]});
         }
       });
     }
