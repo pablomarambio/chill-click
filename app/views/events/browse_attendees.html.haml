@@ -6,10 +6,10 @@
       %strong= "#{@event.name}."
       Recibirás los datos de contacto de aquellos que también te escojan a ti.
     %p
-      %a.btn.btn-primary.btn-large Comenzar!
+      %a#start.btn.btn-primary.btn-large Comenzar!
   #columns
     - @users.each do |user|
-      .pin.ready
+      .pin
         = image_tag user.picture, alt: user.name
         %p
           %strong= user.name
@@ -24,11 +24,44 @@
 
 -content_for :javascript do
   :plain
+    var remainingVotes = 3;
+    $("#start").click(function(e){
+      $(".hero-unit").hide("slow", function() {
+        $("#remaining-votes").parents("li").show(function() {
+          resetVoting();
+          updateRemainingVotes();
+        });
+      });
+      e.preventDefault();
+    });
     $(".vote-btn a").click(function(e) {
-      $(this).parents(".pin").removeClass("ready").addClass("chosen");
+      if(remainingVotes > 0) {
+        remainingVotes--;
+        $(this).parents(".pin").removeClass("ready").addClass("chosen");
+        updateRemainingVotes();
+      }
       e.preventDefault();
     })
     $(".voted-btn a").click(function(e) {
       $(this).parents(".pin").removeClass("chosen").addClass("ready");
+      remainingVotes++;
+      updateRemainingVotes();
       e.preventDefault();
     })
+    $("#reset-votes").click(function(e) {
+      resetVoting();
+      e.preventDefault();
+    });
+
+    function updateRemainingVotes() {
+      $("#remaining-votes").text(remainingVotes).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100, function() {
+        if(remainingVotes == 0) {
+          // show div modal
+        }
+      });
+    }
+
+    function resetVoting() {
+      remainingVotes = 3;
+      $(".pin").removeClass("chosen").addClass("ready");
+    }

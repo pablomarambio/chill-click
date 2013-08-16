@@ -18,7 +18,7 @@
 
 
   %body
-    .navbar
+    .navbar.navbar-fixed-top
       .navbar-inner
         .container
           %button.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
@@ -30,13 +30,11 @@
           %ul.nav
             %li{:class => "active"}
               = link_to "Asistentes de #{@event.name}", "#"
-            - if user_signed_in?
-              - if current_user
-                %li{:class => ""}
-                  = link_to "View Profile", root_path, :id => :public_profile_link
-            - else
-              %li{:class => "active"}
-                = link_to "Login", root_path
+            %li{style: "display:none; "}
+              %a{href: "#"}
+                Escoge
+                %span#remaining-votes.badge.badge-info 3
+                participante(s) más
           - if user_signed_in?
             %ul.nav.pull-right
               %li
