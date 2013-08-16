@@ -8,6 +8,7 @@ gem 'rails', '3.2.11'
 group :test do
 	gem 'sqlite3'
 end
+gem 'eventmachine', '~> 1.0.3'
 gem 'pg'
 gem 'devise'
 gem 'thin'
