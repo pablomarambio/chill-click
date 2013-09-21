@@ -7,8 +7,6 @@ development:
   adapter: postgresql
   host: localhost
   database: chillclick
-  username: postgres
-  password: bbbbbb
   pool: 5
   timeout: 5000
 
